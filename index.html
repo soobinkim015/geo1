@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>이 문화, 어디서 왔게?</title>
+<title>아메리카, 문화가 만나는 자리</title>
 <meta name="description" content="중학교 사회(지리) [9사(지리)05-02] 아메리카의 인구 특징과 문화 혼종성 — 모둠 대항 지도 찍기 게임">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -105,6 +105,40 @@ details > summary { cursor: pointer; }
 .mode.play b { font-size: 28px; }
 .mode.play b::after { content: " →"; }
 .mode.play span { color: rgb(255 255 255 / .85); }
+
+/* 게임 방법 */
+.rules { max-width: 860px; margin: 0 auto; gap: 18px; }
+.rule-count { font-size: 14px; font-weight: 800; color: var(--teal); background: #E3F1EF; padding: 4px 12px; border-radius: 999px; font-variant-numeric: tabular-nums; }
+.rule-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.rule-steps li { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 14px; align-items: center; padding: 16px 18px; border: 1px solid var(--line); border-radius: 14px; background: var(--paper); transition: opacity .2s, border-color .2s, background .2s; }
+.rule-steps li.now { background: #fff; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.rule-steps li.later { opacity: .4; }
+.rule-steps li.later p { display: none; }
+.rule-steps li.done { background: #F2F8F6; border-color: #CFE5E0; }
+.rule-steps li.done .hn { color: var(--teal); }
+.rule-steps .hn { font-size: 26px; font-weight: 900; color: var(--accent); line-height: 1.15; font-variant-numeric: tabular-nums; align-self: start; }
+.rule-steps .hn::before { content: "0"; }
+.rule-steps b { font-size: 17.5px; font-weight: 800; }
+.rule-steps p { color: #34465A; font-size: 15.5px; margin-top: 2px; }
+.rule-steps li.ex p > span { display: block; margin-top: 8px; }
+.rule-steps p b { font-size: inherit; font-weight: 800; color: var(--ink); }
+.rule-steps li.ex p > span.ex-ans { display: flex; }
+.rule-steps em { font-style: normal; font-weight: 700; color: var(--accent-d); white-space: nowrap; }
+.okbtn { display: inline-flex; align-items: center; gap: 6px; border: 1.5px solid var(--line-d); background: #fff; color: var(--muted); border-radius: 999px; padding: 7px 14px 7px 10px; font-size: 14px; font-weight: 700; cursor: pointer; white-space: nowrap; }
+.okbtn svg { width: 18px; height: 18px; border-radius: 50%; padding: 2px; background: var(--soft); color: #B9B2A2; }
+li.now .okbtn { border-color: var(--accent); color: var(--accent-d); }
+li.now .okbtn:hover { background: var(--accent-soft); }
+li.done .okbtn { border-color: var(--teal); background: var(--teal); color: #fff; cursor: default; }
+li.done .okbtn svg { background: rgb(255 255 255 / .25); color: #fff; }
+li.later .okbtn { cursor: not-allowed; }
+@media (max-width: 600px) { .rule-steps li { grid-template-columns: auto minmax(0, 1fr); } .okbtn { grid-column: 2; justify-self: start; } }
+.ex-clue { font-size: 16px; line-height: 1.7; color: var(--ink); background: var(--gold-soft); border-left: 3px solid var(--gold); border-radius: 4px 10px 10px 4px; padding: 10px 14px; }
+.ex-clue mark { background: none; font-weight: 800; box-shadow: inset 0 -0.45em 0 rgb(227 167 58 / .35); color: inherit; }
+.ex-ans { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.ex-ans > span:first-child { font-size: 13px; font-weight: 800; color: var(--muted); margin-right: 4px; }
+.ex-ans .rchip { background: var(--c); border-color: var(--c); color: #fff; cursor: default; }
+.ex-ans .rchip i { background: #fff; }
+.ex-notes { font-size: 14.5px; color: #34465A; }
 
 /* 진행판 */
 .board-wrap { background: var(--navy); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow); }
@@ -263,7 +297,7 @@ span.rchip { cursor: default; }
 <body>
 <header class="top">
   <div class="top-in">
-    <button class="brand" type="button" id="home">이 문화, 어디서 왔게? <small>AMERICAS</small></button>
+    <button class="brand" type="button" id="home">아메리카, 문화가 만나는 자리 <small>AMERICAS</small></button>
     <div class="top-info" id="topInfo"></div>
   </div>
 </header>
@@ -283,22 +317,22 @@ var DEFAULT_SET = [
     roots: [{ cat: "afro", from: "wafrica" }, { cat: "afro", from: "cafrica" }, { cat: "euro", from: "portugal" }],
     explain: "16~19세기 사탕수수 농장에서 일하도록 수백만 명의 아프리카 사람들이 브라질로 끌려왔어요. 아프리카계의 북 장단과 춤이 포르투갈에서 온 기타·선율과 만나 삼바가 되었어요. 인구 지도를 보면 브라질은 혼혈과 아프리카계를 합쳐 절반이 넘어요.", by: "선생님" },
   { cat: "음식", title: "텍스멕스", place: "미국 텍사스 샌안토니오", lat: 29.42, lon: -98.49,
-    clue: "옥수수 토르티야에 소고기를 넣고, 노란 치즈를 듬뿍 녹여 올린 음식이에요. 원주민이 기르던 옥수수와 고추, 스페인 사람들이 들여온 소고기, 미국식 치즈 요리법이 한 접시에 모였어요.",
+    clue: "옥수수 토르티야에 소고기를 넣고, 노란 치즈를 듬뿍 녹여 올린 음식이에요. 원주민이 기르던 옥수수와 고추, 스페인 사람들이 들여온 소고기, 미국에 살던 유럽계 사람들의 치즈 요리법이 한 접시에 모였어요.",
     hints: ["북아메리카에 있어요.", "1836년까지 멕시코 땅이었던 지역이에요. 지금은 다른 나라에 속해요.", "음식 이름은 이 주와 이웃 나라의 이름을 합친 거예요. 이 주 남쪽의 도시예요."],
     roots: [{ cat: "native", from: "here" }, { cat: "euro", from: "spain" }, { cat: "euro", from: "usa" }],
     explain: "텍사스는 스페인 식민지였다가 1836년까지 멕시코 땅이었어요. 그래서 지금도 텍사스 주민 10명 중 4명 정도가 히스패닉·라틴계예요. 원주민의 작물, 스페인의 소고기, 미국 유럽계의 치즈 요리가 섞여 멕시코에도 미국에도 없던 음식이 생겼어요.", by: "선생님" },
   { cat: "축제", title: "망자의 날", place: "멕시코 멕시코시티", lat: 19.43, lon: -99.13,
-    clue: "주황색 꽃과 해골 장식, 조상이 좋아하던 음식으로 제단을 꾸미고 세상을 떠난 가족을 맞이하는 축제예요. 원주민의 조상 맞이 풍습이 가톨릭 기념일(11월 1~2일)과 합쳐졌어요.",
+    clue: "주황색 꽃과 해골 장식, 조상이 좋아하던 음식으로 제단을 꾸미고 세상을 떠난 가족을 맞이하는 축제예요. 원주민의 조상 맞이 풍습이 스페인 사람들이 전한 가톨릭 기념일(11월 1~2일)과 합쳐졌어요.",
     hints: ["북아메리카의 남쪽에 있어요.", "영화 〈코코〉의 배경이 된 나라예요.", "아스테카 문명의 수도 자리에 세워진, 이 나라의 수도예요."],
     roots: [{ cat: "native", from: "here" }, { cat: "euro", from: "spain" }],
-    explain: "멕시코 사람 대부분은 원주민과 유럽계(스페인 사람)가 섞인 메스티소예요. 그래서 원주민의 조상 맞이 의식과 스페인이 가져온 가톨릭이 함께 남아, 슬프지만 밝고 화려한 축제가 되었어요.", by: "선생님" },
+    explain: "인구 지도를 보면 멕시코는 원주민이 약 19%이고, 국민의 절반이 넘는 약 62%가 원주민과 유럽계(스페인 사람)가 섞인 메스티소(혼혈)로 추정돼요. 그래서 원주민의 조상 맞이 의식과 스페인이 가져온 가톨릭이 함께 남아, 슬프지만 밝고 화려한 축제가 되었어요.", by: "선생님" },
   { cat: "축제", title: "오루로 카니발", place: "볼리비아 오루로", lat: -17.97, lon: -67.11,
-    clue: "안데스 산지의 광산 도시에서 열리는 축제예요. 원주민이 땅과 산의 신에게 올리던 의식이 가톨릭 성모 축일과 합쳐졌어요. 무서운 악마 가면을 쓴 춤꾼 수천 명이 거리를 행진해요.",
+    clue: "안데스 산지의 광산 도시에서 열리는 축제예요. 원주민이 땅과 산의 신에게 올리던 의식이 스페인 사람들이 전한 가톨릭 성모 축일과 합쳐졌어요. 무서운 악마 가면을 쓴 춤꾼 수천 명이 거리를 행진해요.",
     hints: ["남아메리카의 안데스산맥에 있어요.", "바다와 맞닿지 않은 나라로, 원주민 비율이 아메리카에서 가장 높은 편이에요.", "해발 3,700m 고원의 광산 도시예요. 이 나라의 행정 수도 라파스에서 남쪽으로 약 200km예요."],
     roots: [{ cat: "native", from: "here" }, { cat: "euro", from: "spain" }],
-    explain: "볼리비아는 10명 중 4명 정도가 스스로 원주민이라고 답할 만큼 원주민 문화가 강하게 남아 있어요. 스페인 사람들이 가져온 가톨릭과 원주민의 의식이 섞여 ‘악마 춤(디아블라다)’ 같은 새로운 축제가 생겼어요.", by: "선생님" },
+    explain: "볼리비아는 10명 중 4명 정도가 스스로 원주민이라고 답할 만큼 원주민 문화가 강하게 남아 있어요. 유럽계는 약 5%로 적지만, 식민지 시대에 스페인 사람들이 가져온 가톨릭과 원주민의 의식이 섞여 ‘악마 춤(디아블라다)’ 같은 새로운 축제가 생겼어요.", by: "선생님" },
   { cat: "스포츠", title: "카리브해식 야구", place: "도미니카공화국 산페드로데마코리스", lat: 18.46, lon: -69.30,
-    clue: "미국에서 시작된 운동이지만, 이 나라에서는 관중석의 밴드가 메렝게 음악을 연주하고 모두 춤추며 응원해요. 1년 내내 따뜻해서 한겨울에도 프로 리그가 열려요.",
+    clue: "미국의 유럽계 사람들이 만든 운동이지만, 이 나라에서는 관중석의 밴드가 메렝게 음악을 연주하고 모두 춤추며 응원해요. 메렝게는 아프리카계의 북 리듬과 스페인의 기타·노래가 섞인 음악이에요. 1년 내내 따뜻해서 한겨울에도 프로 리그가 열려요.",
     hints: ["카리브해에 있어요.", "아이티와 한 섬을 나눠 쓰는 나라로, 메이저리그에서 미국 다음으로 선수가 많아요.", "이 나라 수도에서 동쪽으로 약 70km, 사탕수수 공장마다 야구팀이 있던 도시예요."],
     roots: [{ cat: "euro", from: "usa" }, { cat: "afro", from: "wafrica" }, { cat: "euro", from: "spain" }],
     explain: "야구는 미국의 유럽계 사람들이 만든 운동으로, 19세기 후반 쿠바를 거쳐 이 섬에 전해졌어요. 이 나라 사람 대부분은 아프리카계와 유럽계가 섞인 혼혈이에요. 이들의 음악인 메렝게와 따뜻한 기후가 더해져 ‘카리브해식 야구’가 생겼어요.", by: "선생님" },
@@ -306,23 +340,23 @@ var DEFAULT_SET = [
     clue: "독일에서 만든 손풍금(반도네온) 소리에, 유럽 이민자들의 노래와 아프리카계 사람들의 리듬이 항구 도시에서 만났어요. 두 사람이 꼭 붙어서 추는 춤으로도 유명해요.",
     hints: ["남아메리카의 남쪽, 대서양 쪽에 있어요.", "19세기 말 이탈리아·스페인 이민자가 많이 건너온 나라로, 축구 선수 메시의 나라예요.", "큰 강 하구에 있는 이 나라의 수도예요."],
     roots: [{ cat: "euro", from: "italy" }, { cat: "euro", from: "spain" }, { cat: "euro", from: "germany" }, { cat: "afro", from: "wafrica" }],
-    explain: "19세기 말~20세기 초 수백만 명의 유럽 이민자가 아르헨티나로 건너왔어요. 그래서 이 지역은 유럽계가 아주 많아요(인구 지도에서 이웃 우루과이를 보세요). 이민자들의 음악과 아프리카계의 리듬(칸돔베)이 항구에서 섞여 탱고가 생겼어요.", by: "선생님" },
+    explain: "19세기 말~20세기 초 수백만 명의 유럽 이민자가 아르헨티나로 건너왔어요. 그래서 인구 지도에서 아르헨티나와 이웃 우루과이는 유럽계가 아주 많아요. 지금 아프리카계는 1%도 안 되지만, 19세기 초에는 부에노스아이레스 주민의 약 3분의 1이 아프리카계였어요. 이들의 리듬(칸돔베)과 이민자들의 음악이 항구에서 섞여 탱고가 생겼어요.", by: "선생님" },
   { cat: "음악", title: "소카", place: "트리니다드토바고 포트오브스페인", lat: 10.65, lon: -61.51,
     clue: "아프리카계 사람들의 칼립소 음악에 인도에서 온 북 장단과 가락이 섞인 신나는 음악이에요. 해마다 카니발이 열리면 온 거리가 이 음악으로 들썩여요.",
     hints: ["카리브해에 있어요.", "인도계 주민이 가장 많은 섬나라로, 남아메리카 대륙과 아주 가까워요.", "이 나라의 수도로, 해마다 카리브해에서 손꼽히게 큰 카니발이 열려요."],
     roots: [{ cat: "afro", from: "wafrica" }, { cat: "asia", from: "india" }],
     explain: "노예 제도가 없어진 뒤, 사탕수수 농장에서 일할 사람을 구하려고 1845년부터 인도 사람들이 많이 건너왔어요. 그래서 이 나라는 아시아계(인도계)와 아프리카계가 비슷하게 많아요. 두 문화가 만나 소카가 생겼어요.", by: "선생님" },
   { cat: "음식", title: "치파 (페루식 중국 요리)", place: "페루 리마", lat: -12.05, lon: -77.04,
-    clue: "볶음밥과 볶음국수인데, 안데스의 고추와 감자 같은 이 나라 재료로 만들어요. 19세기에 이 나라의 농장과 철도에서 일하러 바다를 건너온 사람들이 시작했어요.",
+    clue: "볶음밥과 볶음국수인데, 안데스의 고추와 감자 같은 이 나라 재료로 만들어요. 19세기에 이 나라의 농장과 철도에서 일하러 중국에서 바다를 건너온 사람들이 시작했어요.",
     hints: ["남아메리카의 태평양 쪽에 있어요.", "잉카 문명이 있던 나라예요.", "이 나라의 수도예요. 요리 이름이 중국어 ‘吃饭(밥 먹다)’에서 왔다는 이야기가 있어요."],
     roots: [{ cat: "asia", from: "china" }, { cat: "native", from: "here" }],
-    explain: "1849년부터 많은 중국 사람들이 페루의 농장과 철도에서 일하러 건너왔어요. 이들이 원주민이 기르던 고추·감자 같은 재료로 고향 요리를 만들면서 ‘치파’가 생겼어요. 페루는 원주민도 4명 중 1명꼴로 많아요.", by: "선생님" }
+    explain: "1849년부터 많은 중국 사람들이 페루의 농장과 철도에서 일하러 건너왔어요. 이들이 원주민이 기르던 고추·감자 같은 재료로 고향 요리를 만들면서 ‘치파’가 생겼어요. 페루는 원주민도 4명 중 1명꼴로 많아요. 지금 스스로 아시아계라고 답한 사람은 0.2%로 적지만, 치파 식당은 페루 어디에서나 볼 수 있을 만큼 문화가 널리 퍼졌어요.", by: "선생님" }
 ];
 
 // 나라별 인구 구성(%) — 각 나라 인구조사. 키는 국제 국가 번호(ISO 숫자)
 var POP = {
   "840": { ko: "미국", y: "2020", native: 1.1, euro: 61.6, afro: 12.4, asia: 6.0, mixed: 10.2, note: "인종과 따로 18.7%가 히스패닉·라틴계" },
-  "484": { ko: "멕시코", y: "2020", native: 19.4, afro: 2.0, note: "혼혈은 따로 묻지 않음(대부분 메스티소로 알려짐)" },
+  "484": { ko: "멕시코", y: "2020", native: 19.4, afro: 2.0, est: { mixed: 62, euro: 10 } },
   "320": { ko: "과테말라", y: "2018", native: 43.4, mixed: 56.0, afro: 0.2 },
   "192": { ko: "쿠바", y: "2012", euro: 64.1, mixed: 26.6, afro: 9.3 },
   "214": { ko: "도미니카공화국", y: "2006", euro: 13.6, mixed: 67.6, afro: 18.3 },
@@ -332,11 +366,11 @@ var POP = {
   "862": { ko: "베네수엘라", y: "2011", native: 2.7, euro: 43.6, mixed: 51.6, afro: 3.6 },
   "218": { ko: "에콰도르", y: "2022", native: 7.7, euro: 2.2, mixed: 78.9, afro: 3.4 },
   "604": { ko: "페루", y: "2017", native: 25.8, euro: 5.9, mixed: 60.2, afro: 3.6, asia: 0.2 },
-  "068": { ko: "볼리비아", y: "2012", native: 41.5, note: "원주민인지만 따로 물음" },
+  "068": { ko: "볼리비아", y: "2012", native: 41.5, est: { euro: 5, afro: 1 }, note: "혼혈은 따로 묻지 않음" },
   "076": { ko: "브라질", y: "2022", native: 0.6, euro: 43.5, mixed: 45.3, afro: 10.2, asia: 0.4 },
   "600": { ko: "파라과이", y: "2022", native: 2.3, note: "원주민인지만 따로 물음" },
   "152": { ko: "칠레", y: "2017", native: 12.4, note: "원주민인지만 따로 물음" },
-  "032": { ko: "아르헨티나", y: "2022", native: 2.8, afro: 0.7, note: "원주민·아프리카계인지만 따로 물음(대부분 유럽계로 알려짐)" },
+  "032": { ko: "아르헨티나", y: "2022", native: 2.8, afro: 0.7, est: { euro: 97 }, estNote: "유럽계와 메스티소를 합친 값", note: "혼혈은 따로 묻지 않음" },
   "858": { ko: "우루과이", y: "2011", native: 2.4, euro: 87.7, afro: 4.6, asia: 0.2 }
 };
 
@@ -434,7 +468,7 @@ var CATS = ["음악", "춤", "스포츠", "음식", "축제", "언어", "패션"
 var WORLD_URL = "https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json";
 // 구글 시트 연결 주소(웹 앱 URL). 비워 두면 선생님 화면 ‘⓪ 연결 설정’에서 넣은 주소나 학생 링크에 담긴 주소를 써요.
 var SHEET_URL = "";
-var APPS_SCRIPT = "// 「이 문화, 어디서 왔게?」 점수·문제 모으기 — 구글 시트의 Apps Script에 붙여 넣으세요\nfunction doPost(e) {\n  var lock = LockService.getScriptLock();\n  lock.waitLock(10000);\n  try {\n    var d = JSON.parse(e.postData.contents);\n    sheet_().appendRow([new Date(), String(d.room || ''), String(d.type || ''), String(d.team || ''), JSON.stringify(d.data || {})]);\n  } finally {\n    lock.releaseLock();\n  }\n  return ContentService.createTextOutput('{\"ok\":true}').setMimeType(ContentService.MimeType.JSON);\n}\n\nfunction doGet(e) {\n  var room = String((e && e.parameter && e.parameter.room) || '');\n  var rows = sheet_().getDataRange().getValues();\n  var out = { scores: [], questions: [], hidden: {} };\n  for (var i = 1; i < rows.length; i++) {\n    var r = rows[i];\n    if (String(r[1]) !== room) continue;\n    var data;\n    try { data = JSON.parse(r[4]); } catch (err) { continue; }\n    var item = { at: new Date(r[0]).getTime(), team: String(r[3]), data: data };\n    if (r[2] === 'score') out.scores.push(item);\n    else if (r[2] === 'q') out.questions.push(item);\n    else if (r[2] === 'hide') out.hidden[data.id] = true;\n    else if (r[2] === 'unhide') delete out.hidden[data.id];\n  }\n  return ContentService.createTextOutput(JSON.stringify(out)).setMimeType(ContentService.MimeType.JSON);\n}\n\nfunction sheet_() {\n  var ss = SpreadsheetApp.getActiveSpreadsheet();\n  var sh = ss.getSheetByName('기록') || ss.insertSheet('기록');\n  if (sh.getLastRow() === 0) sh.appendRow(['시간', '반', '종류', '모둠', '내용']);\n  return sh;\n}\n";
+var APPS_SCRIPT = "// 「아메리카, 문화가 만나는 자리」 점수·문제 모으기 — 구글 시트의 Apps Script에 붙여 넣으세요\nfunction doPost(e) {\n  var lock = LockService.getScriptLock();\n  lock.waitLock(10000);\n  try {\n    var d = JSON.parse(e.postData.contents);\n    sheet_().appendRow([new Date(), String(d.room || ''), String(d.type || ''), String(d.team || ''), JSON.stringify(d.data || {})]);\n  } finally {\n    lock.releaseLock();\n  }\n  return ContentService.createTextOutput('{\"ok\":true}').setMimeType(ContentService.MimeType.JSON);\n}\n\nfunction doGet(e) {\n  var room = String((e && e.parameter && e.parameter.room) || '');\n  var rows = sheet_().getDataRange().getValues();\n  var out = { scores: [], questions: [], hidden: {} };\n  for (var i = 1; i < rows.length; i++) {\n    var r = rows[i];\n    if (String(r[1]) !== room) continue;\n    var data;\n    try { data = JSON.parse(r[4]); } catch (err) { continue; }\n    var item = { at: new Date(r[0]).getTime(), team: String(r[3]), data: data };\n    if (r[2] === 'score') out.scores.push(item);\n    else if (r[2] === 'q') out.questions.push(item);\n    else if (r[2] === 'hide') out.hidden[data.id] = true;\n    else if (r[2] === 'unhide') delete out.hidden[data.id];\n  }\n  return ContentService.createTextOutput(JSON.stringify(out)).setMimeType(ContentService.MimeType.JSON);\n}\n\nfunction sheet_() {\n  var ss = SpreadsheetApp.getActiveSpreadsheet();\n  var sh = ss.getSheetByName('기록') || ss.insertSheet('기록');\n  if (sh.getLastRow() === 0) sh.appendRow(['시간', '반', '종류', '모둠', '내용']);\n  return sh;\n}\n";
 </script>
 <script>
 (function () {
@@ -595,7 +629,8 @@ var APPS_SCRIPT = "// 「이 문화, 어디서 왔게?」 점수·문제 모으�
     function showTip(ev, d) {
       if (!layer) { tip.hidden = true; return; }
       var P = POP[d.id], box = host.getBoundingClientRect();
-      tip.textContent = P ? P.ko + " · " + ROOTNAME(layer) + " " + (P[layer] != null ? P[layer] + "%" : "조사 안 함") + (P.note && P[layer] == null ? " (" + P.note + ")" : "") : "자료 없음";
+      var V = popVal(P, layer);
+      tip.textContent = P ? P.ko + " · " + ROOTNAME(layer) + " " + (V ? (V.est ? "약 " + V.v + "% (추정" + (P.estNote ? ", " + P.estNote : "") + ")" : V.v + "%") : "인구 조사에서 따로 묻지 않음") : "자료 없음";
       tip.style.left = (ev.clientX - box.left) + "px"; tip.style.top = (ev.clientY - box.top) + "px"; tip.hidden = false;
     }
     self.setLayer = function (key) {
@@ -603,8 +638,8 @@ var APPS_SCRIPT = "// 「이 문화, 어디서 왔게?」 점수·문제 모으�
       var col = layer ? (layer === "mixed" ? MIXED_COLOR : ROOT[layer].color) : null;
       gLand.selectAll("path.country").style("fill", function (d) {
         if (!layer) return null;
-        var P = POP[d.id]; if (!P || P[layer] == null) return null;
-        return d3.interpolateRgb("#FFF8E1", col)(0.12 + 0.88 * Math.min(1, P[layer] / 70));
+        var V = popVal(POP[d.id], layer); if (!V) return null;
+        return d3.interpolateRgb("#FFF8E1", col)(0.12 + 0.88 * Math.min(1, V.v / 70));
       });
     };
     self.clear = function () { gPins.selectAll("*").remove(); gOver.selectAll("*").remove(); };
@@ -636,6 +671,8 @@ var APPS_SCRIPT = "// 「이 문화, 어디서 왔게?」 점수·문제 모으�
     self.setMsg = function (t) { msg.textContent = t || ""; msg.hidden = !t; };
     return self;
   }
+  // 인구 조사 값이 없으면 추정값(est)을 써요
+  function popVal(P, key) { if (!P) return null; if (P[key] != null) return { v: P[key], est: false }; if (P.est && P.est[key] != null) return { v: P.est[key], est: true }; return null; }
   function ROOTNAME(key) { return key === "mixed" ? "혼혈" : ROOT[key].ko; }
   function drawRoots(mv, q, animate) {
     q.roots.forEach(function (r) {
@@ -653,7 +690,7 @@ var APPS_SCRIPT = "// 「이 문화, 어디서 왔게?」 점수·문제 모으�
       b.addEventListener("click", function () { Array.prototype.forEach.call(wrap.querySelectorAll(".lchip"), function (x) { x.setAttribute("aria-pressed", "false"); }); b.setAttribute("aria-pressed", "true"); mv.setLayer(L[0] || null); if (onSet) onSet(L[0]); });
       wrap.appendChild(b);
     });
-    var lg = document.createElement("span"); lg.className = "hint"; lg.textContent = "진할수록 많이 살아요. 나라에 마우스를 올리면 숫자가 나와요.";
+    var lg = document.createElement("span"); lg.className = "hint"; lg.textContent = "진할수록 많이 살아요. 나라에 마우스를 올리면 숫자가 나와요. ‘추정’은 인구 조사에서 묻지 않아 다른 자료로 어림한 값이에요.";
     var box = document.createElement("div"); box.style.display = "grid"; box.style.gap = "4px"; box.appendChild(wrap); box.appendChild(lg);
     return box;
   }
@@ -721,7 +758,7 @@ var APPS_SCRIPT = "// 「이 문화, 어디서 왔게?」 점수·문제 모으�
     var ta = $("#setcode");
     app.querySelector(".card").addEventListener("change", function (e) { if (e.target.name === "set") ta.hidden = e.target.value !== "paste"; });
     $("#back").onclick = function () { go("home"); };
-    function begin(team, name, qs) { S.team = team; S.play = { name: name, qs: qs, idx: 0, results: [], cur: null }; save(); go("stage"); }
+    function begin(team, name, qs) { S.team = team; S.play = { name: name, qs: qs, idx: 0, results: [], cur: null }; save(); go("rules"); }
     $("#start").onclick = function () {
       var team = $("#team").value.trim(), room = $("#room").value.trim(), pick = (app.querySelector('input[name=set]:checked') || {}).value, qs = null, name = "";
       if (!team) { $("#err").textContent = "모둠 이름을 적어 주세요."; return; }
@@ -774,7 +811,7 @@ var APPS_SCRIPT = "// 「이 문화, 어디서 왔게?」 점수·문제 모으�
       '<path d="M148 104 C160 102 170 112 168 128 C164 142 150 146 144 136 C140 126 140 110 148 104Z" fill="rgb(255 255 255 / .28)"/>' +
       '<path d="M152 116 C130 120 104 112 88 94" fill="none" stroke="#E3A73A" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="1 7"/>' +
       '<g class="pin"><path d="M84 36 C71 36 64 46 64 55 C64 69 84 88 84 88 C84 88 104 69 104 55 C104 46 97 36 84 36Z" fill="#D9572B"/><circle cx="84" cy="55" r="7" fill="#fff"/></g></svg>' +
-      '<div class="title-text"><span class="badge">중학교 지리 · 아메리카의 문화</span><h1>이 문화,<br><em>어디서 왔게?</em></h1><p>음악·음식·스포츠 속 단서로 그 문화가 생겨난 곳을 추리하고, 어떤 문화가 섞였는지 찾아보세요.</p></div></section>' +
+      '<div class="title-text"><span class="badge">중학교 지리 · 아메리카의 문화</span><h1>아메리카,<br><em>문화가 만나는 자리</em></h1><p>음악·음식·스포츠 속 단서로 그 문화가 생겨난 곳을 추리하고, 어떤 문화가 섞였는지 찾아보세요.</p></div></section>' +
       (hs ? '<div class="notice">선생님이 보낸 ‘' + esc(hs.name) + '’(' + hs.qs.length + '스테이지)가 준비되어 있어요.</div>' : "") +
       '<div class="how3"><div class="how"><span class="hn">1</span><b>단서 분석</b><span>힌트를 쓰면 지도에 범위가 표시되지만 점수가 줄어요</span></div>' +
       '<div class="how"><span class="hn">2</span><b>위치 표시</b><span>실제 장소와 가까울수록 높은 점수 (최대 1,000점)</span></div>' +
@@ -799,6 +836,43 @@ var APPS_SCRIPT = "// 「이 문화, 어디서 왔게?」 점수·문제 모으�
   }
   function lockIcon(x, y) { return '<g transform="translate(' + (x - 11) + ' ' + (y - 13) + ')"><rect x="1" y="10" width="20" height="14" rx="3" fill="#8EA3B4"/><path d="M5.5 10 V7 a5.5 5.5 0 0 1 11 0 V10" fill="none" stroke="#8EA3B4" stroke-width="2.6"/></g>'; }
   function crown(x, y) { return '<path transform="translate(' + (x - 22) + ' ' + (y - 16) + ')" d="M2 26 L4 6 L14 16 L22 2 L30 16 L40 6 L42 26 Z" fill="#E3A73A" stroke="#172A3A" stroke-width="2" stroke-linejoin="round"/>'; }
+  /* ========== 게임 방법 ========== */
+  screens.rules = function () {
+    var P = S.play; if (!P) return go("home");
+    hud(P);
+    var chip = function (c) { return '<span class="rchip" style="--c:' + ROOT[c].color + '"><i></i>' + ROOT[c].ko + '</span>'; };
+    var steps = [
+      ['단서 읽기', '음악·음식·축제 같은 문화에 대한 설명을 읽어요. 어려우면 힌트를 열어요. 힌트를 열 때마다 지도에 정답이 있는 범위가 좁혀지지만, 위치 점수는 20%씩 줄어요.'],
+      ['위치 표시', '이 문화가 생겨난 곳을 지도에서 눌러요. 흰 점은 주요 도시이고, 점에 마우스를 올리면 도시 정보를 볼 수 있어요. 실제 장소와 가까울수록 점수가 높아요. <em>최대 1,000점</em>'],
+      ['섞인 문화 고르기', '이 문화를 만든 사람들을 모두 골라요. 단서에 나온 사람들을 찾고, 지도 아래 ‘인구 지도’ 버튼으로 그 지역에 실제로 많이 살았는지 확인해요. <em>맞히면 +100점 · 틀리면 −50점</em>'],
+      ['예시로 확인하기', '<span class="ex-clue">“<mark>아프리카에서 끌려온 사람들</mark>의 북 장단에 <mark>유럽에서 온</mark> 작은 기타 소리가 섞인 음악이에요.”</span>' +
+        '<span class="ex-ans"><span>정답</span>' + chip("afro") + chip("euro") + '</span>' +
+        '<span class="ex-notes">· 지금 인구가 적더라도, 역사 속에서 문화를 남긴 사람들이라면 골라요.<br>· 혼혈은 여러 문화가 섞인 결과라서 선택지에 없어요.</span>'],
+      ['별과 보스 스테이지', '점수에 따라 스테이지마다 별을 1~3개 받아요. 마지막 <b>보스 스테이지</b>는 점수가 2배지만, 힌트를 1개만 쓸 수 있어요.']
+    ];
+    var done = P.rulesOk ? steps.length : 0;
+    function draw() {
+      var all = done >= steps.length;
+      app.innerHTML = '<section class="card rules"><div class="row spread"><div><div class="kicker">시작하기 전에</div><h2>게임 방법</h2></div><span class="rule-count">' + Math.min(done, steps.length) + ' / ' + steps.length + ' 확인</span></div>' +
+        '<ol class="rule-steps">' + steps.map(function (st, i) {
+          var state = i < done ? "done" : i === done ? "now" : "later";
+          return '<li class="' + state + (i === 3 ? " ex" : "") + '"><span class="hn">' + (i + 1) + '</span><div><b>' + st[0] + '</b><p>' + st[1] + '</p></div>' +
+            '<button type="button" class="okbtn" data-ok="' + i + '"' + (state === "now" ? "" : " disabled") + ' aria-label="' + st[0] + ' 확인">' +
+            '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 L10 17.5 L19 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><span>' + (state === "done" ? "확인 완료" : "확인했어요") + '</span></button></li>';
+        }).join("") + '</ol>' +
+        '<button class="btn big" type="button" id="toBoard"' + (all ? "" : " disabled") + '>' + (all ? "모험 지도로 →" : "규칙을 모두 확인하면 출발할 수 있어요") + '</button></section>';
+      app.querySelector(".rule-steps").addEventListener("click", function (e) {
+        var b = e.target.closest("[data-ok]"); if (!b || b.disabled) return;
+        done = +b.dataset.ok + 1; if (done >= steps.length) { P.rulesOk = true; save(); }
+        draw();
+        var nx = app.querySelector(".rule-steps li.now") || $("#toBoard");
+        if (nx && nx.scrollIntoView) nx.scrollIntoView({ behavior: "smooth", block: "center" });
+      });
+      $("#toBoard").onclick = function () { go("stage"); };
+    }
+    draw();
+  };
+
   screens.stage = function () {
     var P = S.play; if (!P) return go("home");
     hud(P);
@@ -826,13 +900,14 @@ var APPS_SCRIPT = "// 「이 문화, 어디서 왔게?」 점수·문제 모으�
     });
     s += '</svg>';
     var t = totals(P);
-    app.innerHTML = '<div style="display:grid;gap:16px"><div class="row spread"><h2 style="font-size:32px">모험 지도</h2><span class="hint" style="font-weight:700">별 ' + t.stars + ' / ' + (P.qs.length * 3) + ' · ' + t.pts.toLocaleString() + '점</span></div>' +
+    app.innerHTML = '<div style="display:grid;gap:16px"><div class="row spread"><h2 style="font-size:32px">모험 지도</h2><span class="row"><button class="btn small ghost" type="button" id="howto">게임 방법</button><span class="hint" style="font-weight:700">별 ' + t.stars + ' / ' + (P.qs.length * 3) + ' · ' + t.pts.toLocaleString() + '점</span></span></div>' +
       '<div class="board-wrap">' + s + '</div><div class="stage-foot"><p class="hint">' + (all ? "모든 스테이지를 깼어요!" : isBoss(P, P.idx) ? "마지막은 보스 스테이지! 점수 ×2, 힌트는 1개만 쓸 수 있어요." : "주황색 스테이지를 눌러 시작해요. 별은 점수에 따라 1~3개!") + '</p>' +
       (all ? '<button class="btn big" type="button" id="toResult" style="width:auto">최종 결과 보기</button>' : '<button class="btn big" type="button" id="play" style="width:auto">스테이지 ' + (P.idx + 1) + ' 시작!</button>') + '</div></div>';
     P.just = null; save();
     var startIt = function () { go("round"); };
     if ($("#play")) $("#play").onclick = startIt;
     if ($("#toResult")) $("#toResult").onclick = function () { go("result"); };
+    $("#howto").onclick = function () { go("rules"); };
     var cur = app.querySelector("[data-go-stage]");
     if (cur) { cur.addEventListener("click", startIt); cur.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); startIt(); } }); }
   };
@@ -872,7 +947,7 @@ var APPS_SCRIPT = "// 「이 문화, 어디서 왔게?」 점수·문제 모으�
         if (C.hints) h += '<div class="hintlist">' + q.hints.slice(0, C.hints).map(function (t, i) { return '<p><b>힌트 ' + (i + 1) + '</b>' + esc(t) + '</p>'; }).join("") + '</div>';
         h += '</div>' +
           '<div class="task' + (C.pin ? " done" : "") + '"><h3><span class="sn">' + (C.pin ? "✓" : "1") + '</span>지도에 위치 표시하기</h3><p class="hint" style="margin-top:-4px">' + (C.pin && C.pinName ? "고른 곳: <b>" + esc(C.pinName) + "</b>" + cityBrief(C.pinName) : "흰 점은 주요 도시예요. 점에 마우스를 올리면 도시 개관이 나와요.") + (C.hints ? " 노란 범위 안에 정답이 있어요." : "") + '</p></div>' +
-          '<div class="task' + (C.roots.length ? " done" : "") + '"><h3><span class="sn">' + (C.roots.length ? "✓" : "2") + '</span>누구의 문화가 섞였을까?</h3><p class="hint" style="margin-top:-4px">인구 지도와 같은 이름·색이에요. 섞인 것을 모두 골라요. (혼혈은 섞인 결과라 고르지 않아요)</p><div class="rootchips">' +
+          '<div class="task' + (C.roots.length ? " done" : "") + '"><h3><span class="sn">' + (C.roots.length ? "✓" : "2") + '</span>누구의 문화가 섞였을까?</h3><p class="hint" style="margin-top:-4px">이 문화를 만든 사람들을 모두 골라요. 단서에서 찾고, 인구 지도로 확인해요.</p><div class="rootchips">' +
           Object.keys(ROOT).map(function (c) { return '<button type="button" class="rchip" style="--c:' + ROOT[c].color + '" data-root="' + c + '" aria-pressed="' + (C.roots.indexOf(c) >= 0) + '"><i></i>' + ROOT[c].ko + '</button>'; }).join("") +
           '</div></div>' +
           '<button class="btn big" type="button" id="submit"' + (C.pin && C.roots.length ? "" : " disabled") + '>정답 확인!</button>';
@@ -947,7 +1022,7 @@ var APPS_SCRIPT = "// 「이 문화, 어디서 왔게?」 점수·문제 모으�
         '<label class="f">분야<select data-k="cat">' + CATS.map(function (c) { return '<option' + (c === D.cat ? " selected" : "") + '>' + c + '</option>'; }).join("") + '</select></label>' +
         '<label class="f">정답 (문화 이름)<span class="sub">예) 레게톤, 브레이크댄스, 퀘벡의 푸틴</span><input type="text" data-k="title" maxlength="40" value="' + esc(D.title) + '"></label>' +
         '<label class="f">태어난 곳 이름<span class="sub">나라와 도시. 예) 푸에르토리코 산후안</span><input type="text" data-k="place" maxlength="40" value="' + esc(D.place) + '"></label>' +
-        '<label class="f">첫 단서 (문화 설명)<span class="sub">정답 이름과 장소 이름은 쓰지 마세요. 무엇이 섞였는지 드러나게 써요.</span><textarea data-k="clue" maxlength="300">' + esc(D.clue) + '</textarea></label>';
+        '<label class="f">첫 단서 (문화 설명)<span class="sub">정답 이름과 장소 이름은 쓰지 마세요. <b>누가 무엇을 가져왔는지</b> 드러나게 써요. (예: 아프리카계의 북 장단 + 스페인의 기타)</span><textarea data-k="clue" maxlength="300">' + esc(D.clue) + '</textarea></label>';
       [0, 1, 2].forEach(function (i) { f += '<label class="f">힌트 ' + (i + 1) + '<span class="sub">' + ["넓은 지역 (대륙·바다 정도만)", "나라를 알 수 있는 힌트", "도시를 알 수 있는 힌트"][i] + '</span><input type="text" data-h="' + i + '" maxlength="150" value="' + esc(D.hints[i]) + '"></label>'; });
       f += '<div class="f" style="display:grid;gap:8px"><b style="font-size:14.5px">섞인 문화 (어디서 왔나요?)</b>';
       D.roots.forEach(function (r, i) {
@@ -1150,10 +1225,10 @@ var APPS_SCRIPT = "// 「이 문화, 어디서 왔게?」 점수·문제 모으�
       '<tr><td>2</td><td>출제 (직접 탐구)</td><td>출제실에서 사례를 조사해 문제 만들기: 태어난 곳, 섞인 문화, 단서·힌트, 정답 설명 → ‘이 문제 보내기’</td><td>20분</td></tr>' +
       '<tr><td>2</td><td>2라운드</td><td>‘2라운드 · 우리 반 친구들이 낸 문제’로 서로의 문제 풀기 → 점수판(1·2라운드 합산 + 선생님 보너스)</td><td>15분</td></tr>' +
       '<tr><td>2</td><td>정리</td><td>‘반 전체 지도’에서 문화가 건너온 길의 패턴 찾기 → 인구 구성과 문화 혼종성 연결해 정리</td><td>10분</td></tr></tbody></table></div>' +
-      '<h3>점수 모으기</h3><p>‘⓪ 연결 설정’에서 구글 시트를 한 번 연결하면, 학생 점수와 문제가 자동으로 모여요. 학생에게는 연결 설정에서 만든 <b>학생용 링크</b>를 나눠 주세요. 연결하지 않으면 점수 코드·문제 코드를 붙여 넣는 방식으로도 쓸 수 있어요.</p><h3>점수 규칙</h3><ul><li>위치 점수: 실제 장소와의 거리로 계산해요 (0km = 1,000점, 500km ≈ 720점, 1,500km ≈ 370점). 300km 안이면 황금 도장.</li><li>힌트를 열 때마다 위치 점수 ×0.8 → ×0.6 → ×0.4. 힌트 1은 대륙·바다, 2는 나라, 3은 도시를 알려 주고, 지도에 정답이 들어 있는 노란 범위(반지름 2,500 → 1,200 → 500km)가 함께 나와요.</li><li>섞인 문화: 맞히면 하나에 +100, 틀리면 −50 (0점 아래로는 내려가지 않아요).</li><li>스테이지마다 점수에 따라 별 1~3개(500점 이상 2개, 800점 이상 3개). 마지막 보스 스테이지는 점수 ×2, 힌트는 1개만.</li><li>선생님 보너스(점수판에 직접 입력): 예) 가장 잘 짠 문제, 근거가 가장 탄탄한 정답 설명, 반 지도에서 패턴 발견.</li></ul>' +
+      '<h3>점수 모으기</h3><p>‘⓪ 연결 설정’에서 구글 시트를 한 번 연결하면, 학생 점수와 문제가 자동으로 모여요. 학생에게는 연결 설정에서 만든 <b>학생용 링크</b>를 나눠 주세요. 연결하지 않으면 점수 코드·문제 코드를 붙여 넣는 방식으로도 쓸 수 있어요.</p><h3>섞인 문화를 고르는 기준</h3><ul><li><b>근거 1 (단서 글):</b> 누가 무엇을 가져왔는지 찾아요. 예) “아프리카에서 끌려온 사람들의 북 장단” → 아프리카계</li><li><b>근거 2 (인구 지도):</b> 그 사람들이 그 지역에 실제로 많이 왔거나 살고 있는지 확인해요.</li><li>그 나라에 사는 집단이라도 이 문화에 섞이지 않았다면 고르지 않아요. 예) 브라질에는 원주민이 0.6% 있지만 삼바에는 섞이지 않았어요.</li><li>반대로 지금 인구가 적어도 역사 속에서 문화를 남겼다면 골라요. 예) 아르헨티나의 아프리카계(지금 1% 미만)와 탱고.</li><li>혼혈은 섞인 결과라서 고르는 답에 넣지 않아요.</li></ul><h3>점수 규칙</h3><ul><li>위치 점수: 실제 장소와의 거리로 계산해요 (0km = 1,000점, 500km ≈ 720점, 1,500km ≈ 370점). 300km 안이면 황금 도장.</li><li>힌트를 열 때마다 위치 점수 ×0.8 → ×0.6 → ×0.4. 힌트 1은 대륙·바다, 2는 나라, 3은 도시를 알려 주고, 지도에 정답이 들어 있는 노란 범위(반지름 2,500 → 1,200 → 500km)가 함께 나와요.</li><li>섞인 문화: 맞히면 하나에 +100, 틀리면 −50 (0점 아래로는 내려가지 않아요).</li><li>스테이지마다 점수에 따라 별 1~3개(500점 이상 2개, 800점 이상 3개). 마지막 보스 스테이지는 점수 ×2, 힌트는 1개만.</li><li>선생님 보너스(점수판에 직접 입력): 예) 가장 잘 짠 문제, 근거가 가장 탄탄한 정답 설명, 반 지도에서 패턴 발견.</li></ul>' +
       '<h3>지도 팁</h3><ul><li>경쟁이 ‘빨리 찍기’로 흐르지 않게, 찍기 전에 모둠이 근거를 한 문장으로 말하게 해 보세요. (“아프리카 리듬이니까 아프리카계가 많은 곳!”)</li><li>출제 때는 정답 설명에 그곳의 인구 구성을 꼭 연결하게 하세요. 데이터 지도에서 확인할 수 있어요.</li><li>정치적 판단(이민 찬반 등)보다 “사람이 이동하면 문화도 함께 이동하고 섞인다”는 사실에 초점을 두세요.</li><li>학생 화면의 기록은 그 기기의 브라우저에만 저장돼요. 결과는 구글 시트(또는 점수 코드·문제 코드)로 모여요.</li></ul>' +
       '<h3>이 자료가 보통 퀴즈 도구와 다른 점</h3><ul><li>정답을 고르는 대신 <b>지도에 위치를 찍고, 실제 거리로 점수</b>를 매겨요.</li><li>실제 <b>인구 지도</b>를 작전 도구로 쓰며 자료를 해석해요.</li><li>학생이 <b>자기 관심 분야를 조사해 지도 문제를 직접 만들고</b>, 서로의 문제로 대결해요.</li><li>반 전체 사례를 <b>한 지도에 모아</b> 공간적 패턴을 찾아요.</li></ul>' +
-      '<h3>자료 출처</h3><ul><li>인구 자료: 각 나라 인구조사 (미국 2020, 멕시코 2020, 과테말라 2018, 쿠바 2012, 도미니카공화국 2006 가구 조사, 콜롬비아 2018, 베네수엘라 2011, 에콰도르 2022, 페루 2017, 볼리비아 2012, 트리니다드토바고 2011, 가이아나 2012, 브라질 2022, 파라과이 2022, 칠레 2017, 아르헨티나 2022, 우루과이 2011). 위키백과 ‘Ethnic groups in Latin America’ 정리표 참고. 나라마다 묻는 방식이 달라 직접 비교할 때 주의해요.</li><li>지도: Natural Earth (world-atlas)</li><li>제작: 생성형 AI(Claude)를 활용한 바이브 코딩. 파일 하나(<code>index.html</code>)로 GitHub Pages에 올려 써요.</li></ul>' +
+      '<h3>자료 출처</h3><ul><li>인구 자료: 각 나라 인구조사 (미국 2020, 멕시코 2020, 과테말라 2018, 쿠바 2012, 도미니카공화국 2006 가구 조사, 콜롬비아 2018, 베네수엘라 2011, 에콰도르 2022, 페루 2017, 볼리비아 2012, 트리니다드토바고 2011, 가이아나 2012, 브라질 2022, 파라과이 2022, 칠레 2017, 아르헨티나 2022, 우루과이 2011). 위키백과 ‘Ethnic groups in Latin America’ 정리표 참고. 나라마다 묻는 방식이 달라 직접 비교할 때 주의해요.</li><li>추정값(지도에 ‘추정’으로 표시): 인구 조사에서 묻지 않은 항목은 CIA World Factbook의 민족 구성 추정치를 썼어요 (멕시코 메스티소 62%·유럽계 10%, 볼리비아 유럽계 5%·아프리카계 1%, 아르헨티나 유럽계·메스티소 97%).</li><li>지도: Natural Earth (world-atlas)</li><li>제작: 생성형 AI(Claude)를 활용한 바이브 코딩. 파일 하나(<code>index.html</code>)로 GitHub Pages에 올려 써요.</li></ul>' +
       '<h3>문제를 바꾸고 싶다면</h3><p><code>index.html</code>을 열어 위쪽 <code>DEFAULT_SET</code>을 고치거나, 출제실에서 만든 문제 코드를 ‘반 문제집 만들기’에 붙여 넣으면 돼요.</p></div>';
   }
 
